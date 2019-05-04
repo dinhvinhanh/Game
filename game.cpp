@@ -1,13 +1,13 @@
 #include "game.h"
 #include <iostream>
 #define DELAY 500
-#define IMAGE_RES 64 // Resolution of Shapes
+#define IMAGE_RES 64 
 
 Game::Game()
 {
 	SCREEN_WIDTH = 600;
 	SCREEN_HEIGHT = 600;
-	moves = 0;  // so luot choi
+	moves = 0;  
 	score = 0;
 }
 
@@ -30,7 +30,6 @@ SDL_Texture* Game::loadTexture(string path)
 
 bool Game::init()
 {
-	//Initialization flag
 	bool success = true;
 
 	//Initialize SDL
@@ -41,7 +40,6 @@ bool Game::init()
 	}
 	else
 	{
-		//Create window
 		gWindow = SDL_CreateWindow("Sekiro", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
@@ -50,7 +48,6 @@ bool Game::init()
 		}
 		else
 		{
-			//Get window surface
 			gScreen = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);;
 		}
 	}
@@ -79,8 +76,6 @@ bool Game::init()
 }
 
 bool Game::loadMedia()
-{
-	//Loading success flag
 	bool success = true;
 
 	// Load the 5 Shapes
@@ -232,7 +227,7 @@ void Game::animate_grid(Grid grid)
 		{
 			gCurrentSurface = shapes[grid.get_shape(i, j)];
 			SDL_Rect tmp;
-			tmp.x = j * IMAGE_RES + LEFT; // Since X is Y in SDL
+			tmp.x = j * IMAGE_RES + LEFT; 
 			tmp.y = i * IMAGE_RES + UP;
 			tmp.w = IMAGE_RES;
 			tmp.h = IMAGE_RES;
@@ -258,8 +253,6 @@ void Game::ready_text(string text, int type)
 	}
 	
 	SDL_RenderCopy(gScreen, textTexture, NULL, &tmp);
-
-	//SDL_RenderPresent(gScreen);
 }
 
 void Game::showMenu()
@@ -269,7 +262,7 @@ void Game::showMenu()
 	SDL_RenderCopy(gScreen, menuTexture, NULL, NULL);
 
 	SDL_RenderPresent(gScreen);
-} //dsljldsajf;
+} 
 
 void Game::showInstruction()
 {
@@ -398,20 +391,19 @@ void Game::game_main()
 								if (isvalid)
 								{
 									moves++;
-									vector<int>tmp(10, -1);     // Store coordinates
+									vector<int>tmp(10, -1);    
 									while (grid.sequence(tmp))
 									{
-										// A Match is Made
-										Mix_PlayChannel(-1, gMusic, 0); // Play Sound
-										animate_grid(grid);               // See result of Move
+										Mix_PlayChannel(-1, gMusic, 0); 
+										animate_grid(grid);              
 										SDL_Delay(DELAY / 10);
-										//ready_text("WOW", 2);          // Display "BRAVO!!"
-										animate_point(tmp, grid);          // Display The Celebration
-										grid.update_grid(tmp);            // Update Grid with new Elements
+										//ready_text("WOW", 2);          
+										animate_point(tmp, grid);          
+										grid.update_grid(tmp);          
 										SDL_Delay(DELAY / 10);
 										cascade++;
 									}
-									score += (cascade == 1) ? 10 : 20 * cascade;    // Update Point
+									score += (cascade == 1) ? 10 : 20 * cascade;   
 									//ready_text("READY", 2);
 								}
 								if (cascade == 0)
