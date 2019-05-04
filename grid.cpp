@@ -45,7 +45,6 @@ bool Grid::sequence(vector<int>& tmp)
 		{
 			x = i;
 			y = j;
-			// Check Horizontal
 			if (x < GRID_SIZE - 2 && grid[x][y] == grid[x + 1][y] && grid[x][y] == grid[x + 2][y])
 			{
 				tmp[0] = x; tmp[1] = x + 1; tmp[2] = x + 2;
