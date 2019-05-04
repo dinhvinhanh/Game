@@ -11,8 +11,7 @@ void Grid::load_grid()
 			grid[i][j] = rand() % 5;
 		}
 	}
-	// Remove any Matches
-	vector<int>tmp(10, -1);// Store coordinates
+	vector<int>tmp(10, -1);
 	vector<int>tmp_(10, -1);
 	while (sequence(tmp))
 	{
@@ -23,7 +22,6 @@ void Grid::load_grid()
 
 bool Grid::valid_move(int x0, int y0, int x1, int y1)
 {
-	// Check if move is valid
 	if ((x0 + 1 == x1 && y0 == y1) || (x0 - 1 == x1 && y0 == y1) || (x0 == x1 && y0 + 1 == y1) || (x0 == x1 && y0 - 1 == y1))
 	{
 		swap(grid[x0][y0], grid[x1][y1]);
@@ -90,7 +88,7 @@ void Grid::update_grid(vector<int>& pos)
 
 	int num = rand() % 5;
 
-	if (pos[0] == pos[2]) // Horizontal Match, Row is Constant
+	if (pos[0] == pos[2])
 	{
 		int j = pos[0];
 		while (j > 0)
@@ -120,7 +118,7 @@ void Grid::update_grid(vector<int>& pos)
 			grid[0][pos[9]] = ++num % 5;
 		}
 	}
-	else // Vertical Match , Column is constant
+	else 
 	{
 		int j = pos[2];
 		int x = 3;
